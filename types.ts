@@ -10,6 +10,8 @@ export enum SessionType {
   MEDIA_COMPARE = 'Media Compare',
   PICTURE_COMPARE = 'Picture Compare',
   TABLE_COMPARE = 'Table Compare',
+  FILE_CONVERT = 'File Convert',
+  BATCH_PROCESS = 'Batch Process',
 }
 
 export interface FileEntry {

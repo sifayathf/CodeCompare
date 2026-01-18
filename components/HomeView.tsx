@@ -10,7 +10,9 @@ import {
   Binary, 
   Music, 
   Image as ImageIcon, 
-  Table 
+  Table,
+  Repeat,
+  Layers
 } from 'lucide-react';
 import { SessionType } from '../types';
 
@@ -21,13 +23,14 @@ interface HomeViewProps {
 export const HomeView: React.FC<HomeViewProps> = ({ onSelectSession }) => {
   const sessionOptions = [
     { type: SessionType.FOLDER_COMPARE, icon: FolderSearch, color: 'text-amber-500' },
+    { type: SessionType.TEXT_COMPARE, icon: FileText, color: 'text-blue-500' },
+    { type: SessionType.FILE_CONVERT, icon: Repeat, color: 'text-rose-500' },
+    { type: SessionType.BATCH_PROCESS, icon: Layers, color: 'text-emerald-500' },
     { type: SessionType.FOLDER_MERGE, icon: GitMerge, color: 'text-amber-600' },
     { type: SessionType.FOLDER_SYNC, icon: RefreshCw, color: 'text-amber-700' },
-    { type: SessionType.TEXT_COMPARE, icon: FileText, color: 'text-blue-500' },
     { type: SessionType.TEXT_MERGE, icon: FileDiff, color: 'text-blue-600' },
     { type: SessionType.TEXT_EDIT, icon: Edit3, color: 'text-blue-700' },
     { type: SessionType.HEX_COMPARE, icon: Binary, color: 'text-gray-600' },
-    { type: SessionType.MEDIA_COMPARE, icon: Music, color: 'text-purple-600' },
     { type: SessionType.PICTURE_COMPARE, icon: ImageIcon, color: 'text-green-600' },
     { type: SessionType.TABLE_COMPARE, icon: Table, color: 'text-indigo-600' },
   ];
@@ -42,7 +45,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectSession }) => {
         <div className="space-y-1">
           <div className="pl-4 text-gray-800 font-medium">New</div>
           <div className="pl-8 space-y-1 text-gray-600">
-            {sessionOptions.slice(0, 5).map(opt => (
+            {sessionOptions.slice(0, 8).map(opt => (
               <div 
                 key={opt.type} 
                 className="hover:bg-blue-100 hover:text-blue-700 px-2 py-0.5 rounded cursor-pointer transition-colors"
@@ -56,13 +59,13 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectSession }) => {
       </div>
 
       {/* Main Grid */}
-      <div className="flex-1 flex flex-col items-center justify-center p-10 bg-white">
+      <div className="flex-1 flex flex-col items-center justify-center p-10 bg-white overflow-y-auto custom-scrollbar">
         <div className="text-center mb-12">
-          <h2 className="text-gray-500 mb-2">Drag folders or files onto session icon</h2>
-          <p className="text-gray-400 text-sm italic">or click a session icon to begin:</p>
+          <h2 className="text-gray-500 mb-2">Select a session type to begin</h2>
+          <p className="text-gray-400 text-sm italic underline decoration-dotted">Now supporting File Conversion & Batch Processing</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 max-w-4xl">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 max-w-5xl">
           {sessionOptions.map(({ type, icon: Icon, color }) => (
             <button
               key={type}
@@ -79,7 +82,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onSelectSession }) => {
 
         <div className="mt-20">
           <button className="px-4 py-1.5 border border-gray-300 rounded bg-gray-50 text-gray-700 hover:bg-white text-xs shadow-sm">
-            Edit Defaults
+            Configure Defaults
           </button>
         </div>
       </div>

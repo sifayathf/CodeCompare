@@ -4,6 +4,8 @@ import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-d
 import { HomeView } from './components/HomeView';
 import { FolderCompareView } from './components/FolderCompareView';
 import { TextCompareView } from './components/TextCompareView';
+import { FileConvertView } from './components/FileConvertView';
+import { BatchProcessView } from './components/BatchProcessView';
 import { MenuBar } from './components/MenuBar';
 import { SessionType } from './types';
 
@@ -13,10 +15,18 @@ const AppContent: React.FC = () => {
 
   const handleSessionSelect = (type: SessionType) => {
     setActiveSession(type);
-    if (type === SessionType.TEXT_COMPARE) {
-      navigate('/text');
-    } else {
-      navigate('/folder');
+    switch (type) {
+      case SessionType.TEXT_COMPARE:
+        navigate('/text');
+        break;
+      case SessionType.FILE_CONVERT:
+        navigate('/convert');
+        break;
+      case SessionType.BATCH_PROCESS:
+        navigate('/batch');
+        break;
+      default:
+        navigate('/folder');
     }
   };
 
@@ -49,17 +59,19 @@ const AppContent: React.FC = () => {
           <Route path="/" element={<HomeView onSelectSession={handleSessionSelect} />} />
           <Route path="/folder" element={<FolderCompareView />} />
           <Route path="/text" element={<TextCompareView />} />
+          <Route path="/convert" element={<FileConvertView />} />
+          <Route path="/batch" element={<BatchProcessView />} />
         </Routes>
       </main>
 
       {/* Status Bar */}
       <footer className="bg-[#f0f0f0] border-t border-gray-300 px-3 py-1 flex items-center justify-between text-[11px] text-gray-600 select-none">
         <div className="flex gap-4">
-          <span>0 differences</span>
-          <span>Filtered: *.*</span>
+          <span>Ready</span>
+          <span>Session: {activeSession || 'None'}</span>
         </div>
         <div>
-          <span>Editing disabled</span>
+          <span>Connected</span>
         </div>
       </footer>
     </div>
