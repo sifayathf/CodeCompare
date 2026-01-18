@@ -1,0 +1,5 @@
+{
+  "name": "Web Compare - Advanced File & Folder Comparison",
+  "description": "A high-performance web-based clone of professional comparison utilities like Beyond Compare, supporting folder diffs, text comparison, and sync visualizations.",
+  "requestFramePermissions": []
+}
